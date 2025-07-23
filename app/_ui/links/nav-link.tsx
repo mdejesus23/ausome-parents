@@ -5,15 +5,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 
-export default function NavLink({
-  url,
-  text,
-  isMobile = false,
-}: {
-  url: string;
-  text: string;
-  isMobile?: boolean;
-}) {
+export default function NavLink({ url, text }: { url: string; text: string }) {
   const pathname = usePathname();
 
   console.log('pathname', pathname);

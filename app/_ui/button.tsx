@@ -4,7 +4,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'accent' | 'outline';
   size?: 'sm' | 'md' | 'lg';
-  href?: string;
 }
 
 export default function Button({
@@ -12,7 +11,7 @@ export default function Button({
   className,
   variant = 'primary',
   size = 'md',
-  href,
+
   ...rest
 }: ButtonProps) {
   const baseStyles = [

@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import FaSolidPeopleRoof from '../icons/FaSolidPeopleRoof';
 
 const footerNavs = [
@@ -67,13 +69,13 @@ export default function Footer() {
           {/* Church Info */}
           <div>
             <div className="mb-4">
-              <a
+              <Link
                 href="/"
                 className="inline-flex items-end gap-3 font-serif text-2xl font-bold text-white"
               >
                 <FaSolidPeopleRoof size={2} color="text-white" />
                 <span>Ausome Parents</span>
-              </a>
+              </Link>
             </div>
 
             <address className="mb-4 text-gray-300 not-italic">
@@ -136,12 +138,15 @@ export default function Footer() {
         <div className="mt-8 border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
           <p>&copy; {currentYear} Ausome Parents. All rights reserved.</p>
           <p className="mt-2">
-            <a href="/privacy-policy" className="hover:text-primary-300 mr-4">
+            <Link
+              href="/privacy-policy"
+              className="hover:text-primary-300 mr-4"
+            >
               Privacy Policy
-            </a>
-            <a href="/terms-of-service" className="hover:text-primary-300">
+            </Link>
+            <Link href="/terms-of-service" className="hover:text-primary-300">
               Terms of Service
-            </a>
+            </Link>
           </p>
         </div>
       </div>
