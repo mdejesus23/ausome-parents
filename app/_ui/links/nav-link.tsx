@@ -1,5 +1,9 @@
+'use client';
+
 import type { NavLink } from '@/types';
 import Link from 'next/link';
+import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
 
 export default function NavLink({
   url,
@@ -10,13 +14,15 @@ export default function NavLink({
   text: string;
   isMobile?: boolean;
 }) {
+  const pathname = usePathname();
+
+  console.log('pathname', pathname);
+  console.log('url', url);
   return (
     <li
-      className={
-        isMobile
-          ? 'border-opacity-5 w-full border-b border-neutral-50 px-6 py-5'
-          : ''
-      }
+      className={clsx('text-base', {
+        'text-text-primary': pathname == url,
+      })}
     >
       <Link href={url}>{text}</Link>
     </li>
