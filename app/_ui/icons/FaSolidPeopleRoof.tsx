@@ -8,7 +8,7 @@ export default function FaSolidPeopleRoof({
   color = 'text-text-primary',
 }: Props) {
   return (
-    <span className={color}>
+    <span className={`${color} text-sm md:text-lg`}>
       <svg
         fill="currentColor"
         strokeWidth="0"

@@ -8,8 +8,6 @@ import { usePathname } from 'next/navigation';
 export default function NavLink({ url, text }: { url: string; text: string }) {
   const pathname = usePathname();
 
-  console.log('pathname', pathname);
-  console.log('url', url);
   return (
     <li
       className={clsx('text-base', {
