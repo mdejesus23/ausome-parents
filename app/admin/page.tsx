@@ -16,10 +16,12 @@ const jsonLd = {
 export default async function Page() {
   const session = await auth();
 
-  console.log('session in admin page', session);
-
   if (session?.user?.role !== 'ADMIN') {
-    return <p>You are not authorized to view this page!</p>;
+    return (
+      <div className="flex w-full flex-col gap-[3rem]">
+        <p>You are not authorized to view this page!</p>;
+      </div>
+    );
   }
 
   return (

@@ -48,7 +48,15 @@ export default function Header() {
               ) : session ? (
                 <div className="flex items-center gap-4">
                   {/* <span>Welcome, {session.user?.name?.split(' ')[0]}</span> */}
-                  <Button onClick={() => signOut()}>Sign Out</Button>
+                  <Button
+                    onClick={() =>
+                      signOut({
+                        callbackUrl: '/',
+                      })
+                    }
+                  >
+                    Sign Out
+                  </Button>
                 </div>
               ) : (
                 // <p>test</p>
