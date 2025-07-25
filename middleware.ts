@@ -14,3 +14,8 @@ export async function middleware(req: NextRequest) {
 
   return NextResponse.next();
 }
+
+// Limit it only to the needed paths
+export const config = {
+  matcher: ['/admin/:path*'],
+};

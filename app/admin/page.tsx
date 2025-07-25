@@ -1,6 +1,7 @@
 import { SITE, ISPARTOF } from '@/app/_data/constant';
 import PageHero from '../_ui/global/page-hero';
 import AdminPanel from '@/app/_ui/admin/admin-panel';
+import { auth } from '@/auth';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -12,7 +13,13 @@ const jsonLd = {
   inLanguage: 'en-US',
 };
 
-export default function Page() {
+export default async function Page() {
+  const session = await auth();
+
+  if (session?.user?.role !== 'ADMIN') {
+    return <p>You are not authorized to view this page!</p>;
+  }
+
   return (
     <div className="flex w-full flex-col gap-[3rem]">
       <script
