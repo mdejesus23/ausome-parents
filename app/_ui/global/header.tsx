@@ -21,8 +21,6 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const { data: session, status } = useSession();
 
-  console.log('session', session);
-
   return (
     <header className="sticky top-0 z-50 w-full bg-white/90 shadow-sm backdrop-blur-md">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 py-2 sm:px-6 md:py-4 lg:px-8 lg:py-6">
