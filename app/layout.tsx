@@ -3,6 +3,7 @@ import { source } from '@/app/_ui/fonts';
 import '@/app/_ui/global.css';
 import Header from '@/app/_ui/global/header';
 import Footer from './_ui/global/footer';
+import { SessionProvider } from 'next-auth/react';
 
 export const metadata: Metadata = {
   title: {
@@ -24,9 +25,13 @@ export default function RootLayout({
       <body
         className={`${source.className} text-text-secondary bg-primary antialiased`}
       >
-        <Header />
-        <main className="flex flex-col gap-[3rem]">{children}</main>
-        <Footer />
+        <SessionProvider>
+          <Header />
+          <main className="flex min-h-[80vh] flex-col gap-[3rem]">
+            {children}
+          </main>
+          <Footer />
+        </SessionProvider>
       </body>
     </html>
   );

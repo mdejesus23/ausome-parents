@@ -19,7 +19,7 @@ export default function Page() {
       <section className="px-4 py-12 md:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <p className="mb-8 text-lg text-gray-700">
-            Welcome to <strong>Awesome Parents</strong> — a space dedicated to
+            Welcome to <strong>Ausome Parents</strong> — a space dedicated to
             inspiring, empowering, and celebrating every parent’s journey. We
             believe in the strength of families, the power of love, and the
             beauty of growth.

@@ -10,11 +10,13 @@ export default function NavLink({ url, text }: { url: string; text: string }) {
 
   return (
     <li
-      className={clsx('text-base', {
+      className={clsx('flex items-center justify-center text-base', {
         'text-text-primary': pathname == url,
       })}
     >
-      <Link href={url}>{text}</Link>
+      <Link className="flex items-center justify-center" href={url}>
+        {text}
+      </Link>
     </li>
   );
 }
