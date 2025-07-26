@@ -1,19 +1,14 @@
 import NextAuth from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/app/_lib/prisma';
+import authConfig from './auth.config';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
-  providers: [
-    GoogleProvider({
-      clientId: process.env.AUTH_GOOGLE_ID!,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
-    }),
-  ],
   session: {
     strategy: 'jwt',
   },
+  ...authConfig,
   callbacks: {
     async jwt({ token, user }) {
       // On initial sign-in, include role from DB
