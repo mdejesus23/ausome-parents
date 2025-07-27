@@ -1,8 +1,8 @@
 import { SITE, ISPARTOF } from '@/app/_data/constant';
 import PageHero from '../_ui/global/page-hero';
 import AdminPanel from '@/app/_ui/admin/admin-panel';
-import { auth } from '@/auth';
-import { redirect } from 'next/navigation'; // ✅ Import
+// import { auth } from '@/auth';
+// import { redirect } from 'next/navigation'; // ✅ Import
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -15,11 +15,11 @@ const jsonLd = {
 };
 
 export default async function Page() {
-  const session = await auth();
+  // const session = await auth();
 
-  if (session?.user?.role !== 'ADMIN') {
-    redirect('/unauthorized'); // ✅ Redirect instead of rendering
-  }
+  // if (session?.user?.role !== 'ADMIN') {
+  //   redirect('/unauthorized'); // ✅ Redirect instead of rendering
+  // }
 
   return (
     <div className="flex w-full flex-col gap-[3rem]">
