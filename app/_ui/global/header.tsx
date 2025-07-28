@@ -3,11 +3,10 @@ import Link from 'next/link';
 import type { NavLink as Navlinks } from '@/types';
 import { Power } from 'lucide-react';
 import { auth, signOut } from '@/auth';
-import clsx from 'clsx';
 import Button from '../button';
 import Image from 'next/image';
 import Menu from '../menu';
-import { Children } from 'react';
+import DashboardLink from '../DashboardLink';
 
 export const headerLinks: Navlinks[] = [
   { text: 'Home', url: '/' },
@@ -29,17 +28,14 @@ async function SignOutForm({ isMobile = false }: { isMobile?: boolean }) {
     >
       {session && (
         <div className="flex items-center gap-4">
+          <DashboardLink />
           <form
             action={async () => {
               'use server';
               await signOut({ redirectTo: '/' });
             }}
           >
-            <Button
-              type="submit"
-              // className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
-            >
-              {' '}
+            <Button type="submit">
               <Power size={24} />
             </Button>
           </form>
@@ -50,8 +46,6 @@ async function SignOutForm({ isMobile = false }: { isMobile?: boolean }) {
 }
 
 export default async function Header() {
-  const session = await auth();
-
   return (
     <header className="sticky top-0 z-50 w-full bg-white/90 shadow-sm backdrop-blur-md">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 py-2 sm:px-6 md:py-4 lg:px-8 lg:py-6">

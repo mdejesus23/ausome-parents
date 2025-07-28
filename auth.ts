@@ -20,6 +20,9 @@ async function getUser(email: string): Promise<User | undefined> {
   }
 }
 
+// auth() — used in pages or server actions to get the current user/session
+// signIn() / signOut() — can be used in UI to trigger auth
+// handlers — for /api/auth/[...nextauth] route
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     GoogleProvider,
@@ -44,4 +47,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async session({ session, token, user }) {
+      // Inject custom properties into the session
+      // session.user is created by default, just extend it
+      if (token) {
+        session.user.id = token.id as string;
+        session.user.role = token.role as string;
+      }
+      return session;
+    },
+    async jwt({ token, user }) {
+      // Initial sign-in: attach custom properties to the JWT token
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+      }
+      return token;
+    },
+  },
 });

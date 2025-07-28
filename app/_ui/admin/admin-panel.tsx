@@ -2,7 +2,7 @@
 
 export default function AdminPanel() {
   return (
-    <section className="mx-auto w-full max-w-4xl px-4">
+    <section className="mx-auto mb-20 w-full max-w-4xl px-4">
       <h2 className="mb-6 text-2xl font-semibold">Welcome, Admin!</h2>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div className="rounded-xl border p-4 shadow-sm">
