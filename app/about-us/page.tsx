@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Newsletter from '../_ui/sections/newsletter';
 import PageHero from '../_ui/global/page-hero';
+import { SITE, ISPARTOF } from '@/app/_data/constant';
 
 export const metadata: Metadata = {
   title: 'About Us | Awesome Parents',
@@ -8,9 +9,26 @@ export const metadata: Metadata = {
     'Learn more about the mission, values, and story behind Awesome Parents blog.',
 };
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Admin Dashboard | ' + SITE.title,
+  description: 'Admin dashboard for managing site content and settings.',
+  url: SITE.url + '/admin',
+  isPartOf: ISPARTOF,
+  inLanguage: 'en-US',
+};
+
 export default function Page() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
+
       <PageHero
         title="About us"
         imageSrc="/blog-header-bg.webp"

@@ -3,17 +3,18 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import type { NavLink as Navlinks } from '@/types';
-import { useSession, signIn, signOut } from 'next-auth/react';
-import Button from './button';
+import { ReactNode } from 'react';
+
 export default function MobileMenuDropdown({
   headerLinks,
   setIsMobileMenuOpen,
+  children,
 }: {
   headerLinks: Navlinks[];
   setIsMobileMenuOpen: (arg: boolean) => void;
+  children: ReactNode;
 }) {
   const pathname = usePathname();
-  const { data: session, status } = useSession();
 
   return (
     <div
@@ -48,38 +49,8 @@ export default function MobileMenuDropdown({
             );
           })}
         </div>
-
-        {/* GitHub Link  */}
-        <div className="mt-4 flex items-center justify-center border-t border-gray-100 pt-4">
-          {status === 'loading' ? (
-            <div className="loader"></div>
-          ) : session ? (
-            <div className="flex items-center gap-4">
-              {/* <span>Welcome, {session.user?.name?.split(' ')[0]}</span> */}
-              <Button
-                onClick={() =>
-                  signOut({
-                    callbackUrl: '/',
-                  })
-                }
-              >
-                Sign Out
-              </Button>
-            </div>
-          ) : (
-            // <p>test</p>
-            <Button
-              size="sm"
-              onClick={() =>
-                signIn('google', {
-                  callbackUrl: '/admin',
-                })
-              }
-            >
-              Sign In
-            </Button>
-          )}
-        </div>
+        {/* React Sign Out Form  */}
+        {children}
       </div>
     </div>
   );

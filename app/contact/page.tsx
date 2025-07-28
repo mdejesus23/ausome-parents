@@ -2,6 +2,14 @@ import { SITE, ISPARTOF } from '@/app/_data/constant';
 import PageHero from '../_ui/global/page-hero';
 import ContactForm from '@/app/_ui/contact/contact-form';
 import Newsletter from '../_ui/sections/newsletter';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Contact Page | Awesome Parents ',
+  description:
+    'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
+  metadataBase: new URL('https://awesome-parents.melnerdz.com'), // Update with your real domain
+};
 
 const jsonLd = {
   '@context': 'https://schema.org',

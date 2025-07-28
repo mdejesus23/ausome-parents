@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-
-import FaSolidPeopleRoof from '../icons/FaSolidPeopleRoof';
+import Image from 'next/image';
 
 const footerNavs = [
   {
@@ -73,7 +72,21 @@ export default function Footer() {
                 href="/"
                 className="inline-flex items-end gap-3 font-serif text-2xl font-bold text-white"
               >
-                <FaSolidPeopleRoof size={2} color="text-white" />
+                <Image
+                  src="/ap-logo-white.png"
+                  alt="brand logo image"
+                  width={60}
+                  height={60}
+                  className="hidden md:block"
+                />
+
+                <Image
+                  src="/ap-logo-white.png"
+                  alt="brand logo image"
+                  width={40}
+                  height={40}
+                  className="block md:hidden"
+                />
                 <span>Ausome Parents</span>
               </Link>
             </div>
