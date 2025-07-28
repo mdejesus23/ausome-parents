@@ -4,7 +4,7 @@ import { getToken } from 'next-auth/jwt';
 
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.AUTH_SECRET });
-
+  console.log('token', token);
   const { pathname } = req.nextUrl;
 
   // Allow unauthenticated access to /admin (login page)
