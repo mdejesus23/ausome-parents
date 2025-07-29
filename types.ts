@@ -11,3 +11,8 @@ export type User = {
   password: string;
   role: string;
 };
+
+export type Tag = {
+  id: string;
+  name: string;
+};

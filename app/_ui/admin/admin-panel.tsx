@@ -1,42 +1,53 @@
-'use client';
+import Link from 'next/link';
+
+type PanelItem = {
+  title: string;
+  description: string;
+  url: string;
+};
 
 export default function AdminPanel() {
+  const panelItems: PanelItem[] = [
+    {
+      title: 'Manage Users',
+      description: 'View and edit user roles, activity, and access.',
+      url: '/users',
+    },
+    {
+      title: 'Blog Posting',
+      description: 'Create, update, or delete blog posts.',
+      url: '/admin/dashboard/posts/create',
+    },
+    {
+      title: 'Site Settings',
+      description: 'Customize SEO, layout, and feature toggles.',
+      url: '/settings',
+    },
+    {
+      title: 'Newsletter',
+      description: 'Send updates or view subscribers.',
+      url: '/newsletter',
+    },
+  ];
+
   return (
     <section className="mx-auto mb-20 w-full max-w-4xl px-4">
       <h2 className="mb-6 text-2xl font-semibold">Welcome, Admin!</h2>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <div className="rounded-xl border p-4 shadow-sm">
-          <h3 className="text-text-secondary mb-2 text-lg font-medium">
-            Manage Users
-          </h3>
-          <p className="text-text-secondary text-sm">
-            View and edit user roles, activity, and access.
-          </p>
-        </div>
-        <div className="rounded-xl border p-4 shadow-sm">
-          <h3 className="text-text-secondary mb-2 text-lg font-medium">
-            Themes & Readings
-          </h3>
-          <p className="text-text-secondary text-sm">
-            Create, update, or delete theme-related content.
-          </p>
-        </div>
-        <div className="rounded-xl border p-4 shadow-sm">
-          <h3 className="text-text-secondary mb-2 text-lg font-medium">
-            Site Settings
-          </h3>
-          <p className="text-text-secondary text-sm">
-            Customize SEO, layout, and feature toggles.
-          </p>
-        </div>
-        <div className="rounded-xl border p-4 shadow-sm">
-          <h3 className="text-text-secondary mb-2 text-lg font-medium">
-            Newsletter
-          </h3>
-          <p className="text-text-secondary text-sm">
-            Send updates or view subscribers.
-          </p>
-        </div>
+        {panelItems.map((item, index) => (
+          <div
+            key={index}
+            className="rounded-xl border p-4 shadow-sm transition-shadow hover:shadow-md"
+          >
+            <Link href={item.url}>
+              <h3 className="text-text-secondary mb-2 text-lg font-medium">
+                {item.title}
+              </h3>
+            </Link>
+
+            <p className="text-text-secondary text-sm">{item.description}</p>
+          </div>
+        ))}
       </div>
     </section>
   );

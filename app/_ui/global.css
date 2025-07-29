@@ -56,4 +56,11 @@
       transform: rotate(1turn);
     }
   }
+
+  .ql-editor h1,
+  .ql-editor h2,
+  .ql-editor h3,
+  .ql-editor p {
+    @apply text-text-secondary;
+  }
 }
