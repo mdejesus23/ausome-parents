@@ -9,9 +9,10 @@ export const headerLinks: Navlinks[] = [
   { text: 'About Us', url: '/about-us' },
   { text: 'Blog', url: '/blog' },
   { text: 'Contact', url: '/contact' },
+  { text: 'Admin', url: '/admin' },
 ];
 
-export default function Menu({ children }: { children: ReactNode }) {
+export default function Menu({ children }: { children?: ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   return (

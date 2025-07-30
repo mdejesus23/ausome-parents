@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import { auth, signOut } from '@/auth';
+import { Power } from 'lucide-react';
+import Button from '../button';
 
 type PanelItem = {
   title: string;
@@ -6,7 +9,34 @@ type PanelItem = {
   url: string;
 };
 
-export default function AdminPanel() {
+async function SignOutForm({ isMobile = false }: { isMobile?: boolean }) {
+  const session = await auth();
+
+  return (
+    <div
+      className={
+        isMobile
+          ? 'flex items-center justify-center border-t border-gray-100 pt-4'
+          : ''
+      }
+    >
+      {session && (
+        <form
+          action={async () => {
+            'use server';
+            await signOut({ redirectTo: '/' });
+          }}
+        >
+          <Button variant="primary" size="xs" type="submit" title="Sign out">
+            <Power size={18} />
+          </Button>
+        </form>
+      )}
+    </div>
+  );
+}
+
+export default async function AdminPanel() {
   const panelItems: PanelItem[] = [
     {
       title: 'Manage Users',
@@ -32,7 +62,12 @@ export default function AdminPanel() {
 
   return (
     <section className="mx-auto mb-20 w-full max-w-4xl px-4">
-      <h2 className="mb-6 text-2xl font-semibold">Welcome, Admin!</h2>
+      <div className="mb-6 flex items-center justify-between">
+        <h2 className="text-2xl font-semibold">Welcome, Admin!</h2>
+        {/* Sign Out Button (Desktop) */}
+        <SignOutForm />
+      </div>
+
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         {panelItems.map((item, index) => (
           <div
@@ -44,10 +79,14 @@ export default function AdminPanel() {
                 {item.title}
               </h3>
             </Link>
-
             <p className="text-text-secondary text-sm">{item.description}</p>
           </div>
         ))}
+      </div>
+
+      {/* Sign Out Button (Mobile) */}
+      <div className="mt-6 sm:hidden">
+        <SignOutForm isMobile />
       </div>
     </section>
   );

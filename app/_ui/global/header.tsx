@@ -1,49 +1,16 @@
 import NavLink from '@/app/_ui/links/nav-link';
 import Link from 'next/link';
 import type { NavLink as Navlinks } from '@/types';
-import { Power } from 'lucide-react';
-import { auth, signOut } from '@/auth';
-import Button from '../button';
 import Image from 'next/image';
 import Menu from '../menu';
-import DashboardLink from '../DashboardLink';
 
 export const headerLinks: Navlinks[] = [
   { text: 'Home', url: '/' },
   { text: 'About Us', url: '/about-us' },
   { text: 'Blog', url: '/blog' },
   { text: 'Contact', url: '/contact' },
+  { text: 'Admin', url: '/admin' },
 ];
-
-async function SignOutForm({ isMobile = false }: { isMobile?: boolean }) {
-  const session = await auth();
-
-  return (
-    <div
-      className={
-        isMobile
-          ? 'flex items-center justify-center border-t border-gray-100 pt-4'
-          : ''
-      }
-    >
-      {session && (
-        <div className="flex items-center gap-4">
-          <DashboardLink />
-          <form
-            action={async () => {
-              'use server';
-              await signOut({ redirectTo: '/' });
-            }}
-          >
-            <Button variant="outline" size="xs" type="submit">
-              <Power size={18} />
-            </Button>
-          </form>
-        </div>
-      )}
-    </div>
-  );
-}
 
 export default async function Header() {
   return (
@@ -80,16 +47,11 @@ export default async function Header() {
                 text={link.text}
               />
             ))}
-
-            <SignOutForm />
           </ul>
         </nav>
 
         {/* Mobile Menu Button  */}
-
-        <Menu>
-          <SignOutForm isMobile={true} />
-        </Menu>
+        <Menu />
       </div>
     </header>
   );
