@@ -77,7 +77,7 @@ export default function Footer() {
                   alt="brand logo image"
                   width={60}
                   height={60}
-                  className="hidden md:block"
+                  className="hidden h-auto w-auto md:block"
                 />
 
                 <Image
@@ -85,7 +85,7 @@ export default function Footer() {
                   alt="brand logo image"
                   width={40}
                   height={40}
-                  className="block md:hidden"
+                  className="block h-auto w-auto md:hidden"
                 />
                 <span>Ausome Parents</span>
               </Link>

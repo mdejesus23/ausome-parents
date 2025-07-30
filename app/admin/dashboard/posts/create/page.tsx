@@ -44,7 +44,7 @@ export default async function Page() {
       <section className="min-h-[60vh] px-4 py-10 md:px-8">
         <div className="container mx-auto">
           {/* Post In Form */}
-          <Suspense>
+          <Suspense fallback={<div className="loader"></div>}>
             <CreatePostForm tags={tags} />
           </Suspense>
         </div>

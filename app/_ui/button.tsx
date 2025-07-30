@@ -1,9 +1,11 @@
 import clsx from 'clsx';
+import Link from 'next/link';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'accent' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+  href?: string;
 }
 
 export default function Button({
@@ -11,6 +13,7 @@ export default function Button({
   className,
   variant = 'primary',
   size = 'md',
+  href,
 
   ...rest
 }: ButtonProps) {
@@ -26,6 +29,7 @@ export default function Button({
   ];
 
   const sizeStyles = {
+    xs: 'px-2 py-2 text-xs',
     sm: 'px-4 py-2 text-sm',
     md: 'px-6 py-3',
     lg: 'px-8 py-4 text-lg',
@@ -67,6 +71,14 @@ export default function Button({
     sizeStyles[size],
     variantStyles[variant],
   ].join(' ');
+
+  if (href) {
+    return (
+      <Link href={href} className={clsx(classes, className)}>
+        {children}
+      </Link>
+    );
+  }
 
   return (
     <button type="button" {...rest} className={clsx(classes, className)}>

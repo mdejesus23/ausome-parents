@@ -23,7 +23,38 @@ export default function Hero() {
             A blog dedicated to inspiring and guiding parents on a journey of
             love, growth, and grace.
           </p>
-          <Button variant="primary">Subscribe</Button>
+
+          {/* CTA for Desktop View  */}
+          <div className="hidden w-full items-center justify-center gap-4 md:flex">
+            <Button href="#newsletter" variant="primary" size="lg">
+              Subscribe
+            </Button>
+
+            <Button
+              href="/contact"
+              variant="outline"
+              size="lg"
+              className="border-white bg-white/10 text-white backdrop-blur-sm hover:bg-white hover:text-gray-900"
+            >
+              Contact Us
+            </Button>
+          </div>
+
+          {/* CTA for Mobile View  */}
+          <div className="flex w-full items-center justify-center gap-2 md:hidden">
+            <Button href="#newsletter" variant="primary" size="sm">
+              Subscribe
+            </Button>
+
+            <Button
+              href="/contact"
+              variant="outline"
+              size="sm"
+              className="border-white bg-white/10 text-white backdrop-blur-sm hover:bg-white hover:text-gray-900"
+            >
+              Contact Us
+            </Button>
+          </div>
         </div>
       </div>
     </section>

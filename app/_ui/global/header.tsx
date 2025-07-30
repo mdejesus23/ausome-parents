@@ -35,8 +35,8 @@ async function SignOutForm({ isMobile = false }: { isMobile?: boolean }) {
               await signOut({ redirectTo: '/' });
             }}
           >
-            <Button type="submit">
-              <Power size={24} />
+            <Button variant="outline" size="xs" type="submit">
+              <Power size={18} />
             </Button>
           </form>
         </div>
@@ -55,7 +55,7 @@ export default async function Header() {
             alt="brand logo image"
             width={50}
             height={50}
-            className="hidden md:block"
+            className="hidden h-auto w-auto md:block"
           />
 
           <Image
@@ -63,7 +63,7 @@ export default async function Header() {
             alt="brand logo image"
             width={40}
             height={40}
-            className="block md:hidden"
+            className="block h-auto w-auto md:hidden"
           />
           <h1 className="text-text-primary text-xl font-bold md:text-2xl">
             Ausome Parents

@@ -13,7 +13,11 @@ export function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="submit" disabled={pending}>
+    <Button
+      type="submit"
+      disabled={pending}
+      className="w-full max-w-sm sm:w-auto"
+    >
       {pending ? 'Subscribing...' : 'Subscribe'}
     </Button>
   );
@@ -55,6 +59,7 @@ export default function Newsletter() {
             from Ausome Parents.
           </p>
           <form
+            id="newsletter"
             action={formAction}
             className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
           >

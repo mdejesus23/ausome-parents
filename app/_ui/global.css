@@ -1,21 +1,29 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Brand Colors */
-  --color-primary: #ffffff;
-  --color-secondary: #111827;
+  /* =======================
+     Brand Colors
+     These are the core colors of your website’s brand identity.
+  ======================= */
+  --color-primary: #ffffff; /* Main background or primary surfaces */
+  --color-secondary: #111827; /* Dark color for footer, or emphasis */
+  --color-tertiary: #f9fafb; /* Light neutral background for sections/cards */
 
-  /* Text Colors */
-  --color-text-primary: #2563eb;
-  --color-text-secondary: #4b5563;
+  /* =======================
+     Text Colors
+     Used for primary and secondary text elements.
+  ======================= */
+  --color-text-primary: #2563eb; /* Main text or headline color */
+  --color-text-secondary: #4b5563; /* Subtext, descriptions, or muted text */
 
-  /* background colors  */
-  --color-bgprimary: #111827;
-  --color-bgsecondary: #ffffff;
-
-  /* Fonts */
-  --font-playfair: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Source Sans Pro', system-ui, sans-serif;
+  /* =======================
+     Font Families
+     Define typography hierarchy for headings and body text.
+  ======================= */
+  --font-playfair:
+    'Playfair Display', Georgia, serif; /* Elegant serif for headings */
+  --font-sans:
+    'Source Sans Pro', system-ui, sans-serif; /* Clean sans-serif for body text */
 }
 
 @layer base {
