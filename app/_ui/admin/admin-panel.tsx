@@ -46,7 +46,7 @@ export default async function AdminPanel() {
     {
       title: 'Blog Posting',
       description: 'Create, update, or delete blog posts.',
-      url: '/admin/dashboard/posts/create',
+      url: '/admin/dashboard/posts',
     },
     {
       title: 'Site Settings',
@@ -82,11 +82,6 @@ export default async function AdminPanel() {
             <p className="text-text-secondary text-sm">{item.description}</p>
           </div>
         ))}
-      </div>
-
-      {/* Sign Out Button (Mobile) */}
-      <div className="mt-6 sm:hidden">
-        <SignOutForm isMobile />
       </div>
     </section>
   );

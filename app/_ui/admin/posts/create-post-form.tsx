@@ -112,7 +112,7 @@ export default function CreatePostForm({ tags }: { tags: Tag[] }) {
           type="date"
           name="pubDate"
           aria-describedby="pub_date-error"
-          className="focus:border-primary-500 focus:ring-primary-500 w-40 appearance-none rounded-md border border-gray-300 px-4 py-2 text-gray-700 placeholder-gray-400 focus:ring-1 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 [&::-webkit-calendar-picker-indicator]:opacity-60 [&::-webkit-calendar-picker-indicator]:hover:opacity-100"
+          className="focus:ring-primary-500 focus:border-primary-500 w-40 rounded-md border border-gray-300 px-4 py-2"
         />
 
         <div id="pubDate-error" aria-live="polite" aria-atomic="true">
