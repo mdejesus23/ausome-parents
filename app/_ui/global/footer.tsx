@@ -91,24 +91,6 @@ export default function Footer() {
               </Link>
             </div>
 
-            <address className="mb-4 text-gray-300 not-italic">
-              <p>123 Main Street</p>
-              <p>Anytown, ST 12345</p>
-              <p className="mt-2">
-                <a href="tel:+15551234567" className="hover:text-primary-300">
-                  (555) 123-4567
-                </a>
-              </p>
-              <p>
-                <a
-                  href="mailto:info@churchname.org"
-                  className="hover:text-primary-300"
-                >
-                  info@churchname.org
-                </a>
-              </p>
-            </address>
-
             {/* Social Links */}
             <div className="mt-6 flex space-x-4">
               {socialLinks.map((link) => (
@@ -150,7 +132,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-8 border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
           <p>&copy; {currentYear} Ausome Parents. All rights reserved.</p>
-          <p className="mt-2">
+          {/* <p className="mt-2">
             <Link
               href="/privacy-policy"
               className="hover:text-primary-300 mr-4"
@@ -160,7 +142,7 @@ export default function Footer() {
             <Link href="/terms-of-service" className="hover:text-primary-300">
               Terms of Service
             </Link>
-          </p>
+          </p> */}
         </div>
       </div>
     </footer>

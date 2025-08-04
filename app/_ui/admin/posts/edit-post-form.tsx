@@ -4,40 +4,46 @@ import { useState, useEffect } from 'react';
 import QuillEditor from '@/app/_ui/admin/posts/quill-editor';
 import { useFormStatus } from 'react-dom';
 import Button from '../../button';
-import type { Tag } from '@/types';
+import type { Tag, Post } from '@/types';
 import { CldUploadWidget } from 'next-cloudinary';
 import { Image as ImageIcon } from 'lucide-react';
-import { createPost, State } from '@/app/_lib/posts/action';
+import { updatePost, State } from '@/app/_lib/posts/action';
 import { useActionState } from 'react';
 import slugify from '@/app/_utils/slugify';
 import { toast } from 'react-hot-toast';
+
+import Image from 'next/image';
 
 export function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
     <Button type="submit" disabled={pending}>
-      {pending ? 'Creating...' : <>Create Post</>}
+      {pending ? 'Saving...' : <>Save Post</>}
     </Button>
   );
 }
 
-export default function CreatePostForm({ tags }: { tags: Tag[] }) {
-  const [content, setContent] = useState<string>('');
-  const [image, setImage] = useState<string>('');
-  const [slug, setSlug] = useState<string>('');
+export default function EditPostForm({
+  tags,
+  post,
+}: {
+  tags: Tag[];
+  post: Post;
+}) {
+  const [content, setContent] = useState<string>(post.content || '');
+  const [image, setImage] = useState<string>(post.image || '');
+  const [slug, setSlug] = useState<string>(post.slug || '');
 
+  const updatePostWithId = updatePost.bind(null, post.id);
   const initialState: State = { message: null, errors: {} };
-  const [state, formAction] = useActionState(createPost, initialState);
+  const [state, formAction] = useActionState(updatePostWithId, initialState);
 
   useEffect(() => {
     if (state.message === null) return;
 
     if (!state.errors && state.message) {
       toast.success(state.message);
-      setImage('');
-      setSlug('');
-      setContent('');
     } else if (state.errors && state.message) {
       toast.error(state.message);
     }
@@ -51,6 +57,7 @@ export default function CreatePostForm({ tags }: { tags: Tag[] }) {
           type="text"
           name="title"
           placeholder="Post Title"
+          defaultValue={post.title}
           className="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-4 py-2"
           aria-describedby="title-error"
           onChange={(e) => {
@@ -72,6 +79,7 @@ export default function CreatePostForm({ tags }: { tags: Tag[] }) {
           type="text"
           name="author"
           placeholder="Author"
+          defaultValue={post.author}
           aria-describedby="author-error"
           className="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-4 py-2"
         />
@@ -109,7 +117,12 @@ export default function CreatePostForm({ tags }: { tags: Tag[] }) {
         <input
           type="date"
           name="pubDate"
-          aria-describedby="pub_date-error"
+          defaultValue={
+            post.pub_date
+              ? new Date(post.pub_date).toISOString().split('T')[0]
+              : ''
+          }
+          aria-describedby="pubDate-error"
           className="focus:ring-primary-500 focus:border-primary-500 w-40 rounded-md border border-gray-300 px-4 py-2"
         />
 
@@ -129,27 +142,42 @@ export default function CreatePostForm({ tags }: { tags: Tag[] }) {
           name="image"
           value={image}
           aria-describedby="image-error"
-          className="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-4 py-2"
         />
 
         <CldUploadWidget
           signatureEndpoint="/api/sign-cloudinary-params"
           options={{
-            folder: 'ausome_parents_images', // Your folder in Cloudinary
+            folder: 'ausome_parents_images',
           }}
           onSuccess={(results) => {
-            // @ts-expect-error test
+            // @ts-expect-error cloudinary type
             setImage(results.info.secure_url);
           }}
         >
           {({ open }) => {
             return (
-              <Button size="sm" className="w-40" onClick={() => open()}>
+              <Button
+                size="sm"
+                className="w-40"
+                type="button"
+                onClick={() => open()}
+              >
                 Upload <ImageIcon size={20} />
               </Button>
             );
           }}
         </CldUploadWidget>
+
+        {image && (
+          <Image
+            src={image}
+            alt="Preview"
+            width={200}
+            height={200}
+            className="mt-2 w-40 rounded border border-gray-300"
+          />
+        )}
+
         <div id="image-error" aria-live="polite" aria-atomic="true">
           {state.errors?.image &&
             state.errors.image.map((error: string) => (
@@ -164,6 +192,7 @@ export default function CreatePostForm({ tags }: { tags: Tag[] }) {
         <textarea
           name="description"
           placeholder="Short Description"
+          defaultValue={post.description}
           aria-describedby="description-error"
           className="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-4 py-2"
         />
@@ -187,6 +216,7 @@ export default function CreatePostForm({ tags }: { tags: Tag[] }) {
                 type="checkbox"
                 name="tags[]"
                 value={tag.id}
+                defaultChecked={post.tags?.includes(tag.name)}
                 className="text-primary-600 focus:ring-primary-500 h-4 w-4 border-gray-300"
               />
               {tag.name}
@@ -198,7 +228,6 @@ export default function CreatePostForm({ tags }: { tags: Tag[] }) {
       <div>
         <label className="mb-2 block font-medium">Post Content</label>
         <QuillEditor value={content} onChange={setContent} />
-        {/* Hidden input to pass the HTML to server action */}
         <input type="hidden" name="content" value={content} />
         <div id="content-error" aria-live="polite" aria-atomic="true">
           {state.errors?.content &&

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getPosts } from '@/app/_lib/data-services';
 import type { Post } from '@/types';
 
-export default async function FeaturedArticles() {
+export default async function PostLists() {
   const posts: Post[] = await getPosts();
 
   return (

@@ -2,6 +2,7 @@
 
 import postgres from 'postgres';
 import { z } from 'zod';
+import { revalidatePath } from 'next/cache';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -89,4 +90,72 @@ export async function createPost(prevState: State, formData: FormData) {
     console.error(error);
     return { message: 'Database Error: Failed to Create Post.' };
   }
+}
+
+export async function updatePost(
+  id: string,
+  prevState: State,
+  formData: FormData,
+) {
+  // Extract tags first
+  const tags = formData.getAll('tags[]') as string[];
+
+  const validatedFields = FormSchema.safeParse({
+    title: formData.get('title'),
+    author: formData.get('author'),
+    slug: formData.get('slug'),
+    pubDate: formData.get('pubDate'),
+    image: formData.get('image'),
+    description: formData.get('description'),
+    content: formData.get('content'),
+  });
+
+  // If form validation fails, return errors early
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing or invalid fields. Failed to update Post.',
+    };
+  }
+
+  const { title, author, pubDate, slug, image, description, content } =
+    validatedFields.data;
+
+  try {
+    // 1️⃣ Update the post
+    await sql`
+      UPDATE posts
+      SET title = ${title},
+          pub_date = ${pubDate},
+          author = ${author},
+          slug = ${slug},
+          image = ${image},
+          description = ${description},
+          content = ${content}
+      WHERE id = ${id};
+    `;
+
+    // 2️⃣ Update tags
+    // Remove old tags
+    await sql`DELETE FROM post_tags WHERE post_id = ${id};`;
+
+    // Insert new tags if any
+    if (tags.length > 0) {
+      const values = tags.map((tagId) => `('${id}', '${tagId}')`).join(', ');
+
+      await sql.unsafe(
+        `INSERT INTO post_tags (post_id, tag_id) VALUES ${values} ON CONFLICT DO NOTHING`,
+      );
+    }
+
+    return { message: 'Post updated successfully!' };
+  } catch (error) {
+    console.error('Database Error:', error);
+    return { message: 'Database Error: Failed to update Post.', errors: {} };
+  }
+}
+
+export async function deletePost(id: string) {
+  await sql`DELETE FROM posts WHERE id = ${id}`;
+  revalidatePath('/admin/dashboard/posts');
 }

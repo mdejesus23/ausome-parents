@@ -42,3 +42,57 @@ export async function getPosts() {
     throw new Error('Failed to fetch posts data.');
   }
 }
+
+export async function getPostById(id: string) {
+  try {
+    const rows = await sql<Post[]>`
+    SELECT 
+      posts.id,
+      posts.title,
+      posts.pub_date,
+      posts.author,
+      posts.image,
+      posts.slug,
+      posts.description,
+      posts.content,
+      array_remove(array_agg(tags.name), NULL) AS tags
+    FROM posts
+    LEFT JOIN post_tags ON posts.id = post_tags.post_id
+    LEFT JOIN tags ON post_tags.tag_id = tags.id
+    WHERE posts.id = ${id}
+    GROUP BY posts.id
+  `;
+
+    return rows[0] || null; // ✅ rows is typed as Post[]
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch post data.');
+  }
+}
+
+export async function getPostBySlug(slug: string) {
+  try {
+    const rows = await sql<Post[]>`
+    SELECT 
+      posts.id,
+      posts.title,
+      posts.pub_date,
+      posts.author,
+      posts.image,
+      posts.slug,
+      posts.description,
+      posts.content,
+      array_remove(array_agg(tags.name), NULL) AS tags
+    FROM posts
+    LEFT JOIN post_tags ON posts.id = post_tags.post_id
+    LEFT JOIN tags ON post_tags.tag_id = tags.id
+    WHERE posts.slug = ${slug}
+    GROUP BY posts.id
+  `;
+
+    return rows[0] || null; // ✅ rows is typed as Post[]
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch post data.');
+  }
+}

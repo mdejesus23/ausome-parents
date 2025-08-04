@@ -1,12 +1,18 @@
-import PageHero from '@/app/_ui/global/page-hero';
-import { getPosts } from '@/app/_lib/data-services';
-import { SITE } from '@/app/_data/constant';
-import { Plus } from 'lucide-react';
+import { getPosts } from '../_lib/data-services';
 import type { Post } from '@/types';
-import Button from '@/app/_ui/button';
+import { Metadata } from 'next';
 import { Suspense } from 'react';
-import PostTable from '@/app/_ui/admin/posts/post-table';
-import Loader from '@/app/_ui/loader';
+import { SITE } from '@/app/_data/constant';
+import PageHero from '@/app/_ui/global/page-hero';
+import { FeaturedArticlesSkeleton } from '@/app/_ui/skeleton';
+import PostLists from '../_ui/sections/post-lists';
+
+export const metadata: Metadata = {
+  title: 'Posts | Awesome Parents ',
+  description:
+    'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
+  metadataBase: new URL('https://awesome-parents.melnerdz.com'), // Update with your real domain
+};
 
 export default async function Page() {
   const posts: Post[] = await getPosts();
@@ -44,22 +50,11 @@ export default async function Page() {
         }}
       />
 
-      <PageHero
-        imageSrc="/blog-header-bg.webp"
-        title="Posts List"
-        excerpt="Browse all blog posts below."
-      />
+      <PageHero imageSrc="/blog-header-bg.webp" title="Posts Article" />
 
       <section className="container mx-auto my-20 px-4">
-        <div className="mb-6 flex items-center justify-end">
-          <Button href="/admin/dashboard/posts/create" className="mb-6">
-            Create New Post
-            <Plus />
-          </Button>
-        </div>
-
-        <Suspense fallback={<Loader />}>
-          <PostTable />
+        <Suspense fallback={<FeaturedArticlesSkeleton />}>
+          <PostLists />
         </Suspense>
       </section>
     </div>

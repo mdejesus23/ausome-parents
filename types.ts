@@ -20,7 +20,7 @@ export type Tag = {
 type TimestampTz = string | Date;
 
 export type Post = {
-  id: number;
+  id: string;
   title: string;
   pub_date: TimestampTz;
   image: string;

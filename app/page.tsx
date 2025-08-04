@@ -2,6 +2,8 @@ import { SITE, ISPARTOF } from '@/app/_data/constant';
 import Hero from '@/app/_ui/sections/hero';
 import FeaturedArticles from './_ui/sections/featured-articles';
 import Newsletter from './_ui/sections/newsletter';
+import { Suspense } from 'react';
+import { FeaturedArticlesSkeleton } from '@/app/_ui/skeleton';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -13,7 +15,7 @@ const jsonLd = {
   inLanguage: 'en-US',
 };
 
-export default function Page() {
+export default async function Page() {
   return (
     <div className="flex w-full flex-col gap-[3rem]">
       {/* Add JSON-LD to your page */}
@@ -25,7 +27,9 @@ export default function Page() {
       />
 
       <Hero />
-      <FeaturedArticles />
+      <Suspense fallback={<FeaturedArticlesSkeleton />}>
+        <FeaturedArticles />
+      </Suspense>
       <Newsletter />
     </div>
   );
