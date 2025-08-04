@@ -62,7 +62,7 @@ export default async function Page(props: {
   };
 
   return (
-    <article className="mb-20">
+    <section className="mb-20">
       {/* JSON-LD for SEO */}
       <script
         type="application/ld+json"
@@ -79,14 +79,14 @@ export default async function Page(props: {
       {/* Post Content */}
       <div className="mx-auto mt-10 max-w-[45rem] px-4 lg:px-8">
         <div className="mb-8 text-gray-500">
-          <span>{new Date(post.pub_date).toLocaleDateString()}</span> ·{' '}
-          <span>{post.author}</span>
+          {/* <span>{new Date(post.pub_date).toLocaleDateString()}</span> */}
+          {/* <span>{post.author}</span> */}
         </div>
 
         <Prose>
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </Prose>
       </div>
-    </article>
+    </section>
   );
 }

@@ -85,6 +85,7 @@ export async function createPost(prevState: State, formData: FormData) {
       );
     }
 
+    revalidatePath('/admin/dashboard/posts');
     return { message: 'Post created successfully!' };
   } catch (error) {
     console.error(error);
@@ -148,6 +149,7 @@ export async function updatePost(
       );
     }
 
+    revalidatePath('/admin/dashboard/posts');
     return { message: 'Post updated successfully!' };
   } catch (error) {
     console.error('Database Error:', error);
