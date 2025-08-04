@@ -22,7 +22,7 @@ export default async function Header() {
             alt="brand logo image"
             width={50}
             height={50}
-            className="hidden h-auto w-auto md:block"
+            className="hidden h-10 w-10 md:block"
           />
 
           <Image
@@ -30,7 +30,7 @@ export default async function Header() {
             alt="brand logo image"
             width={40}
             height={40}
-            className="block h-auto w-auto md:hidden"
+            className="block h-10 w-10 md:hidden"
           />
           <h1 className="text-text-primary text-xl font-bold md:text-2xl">
             Ausome Parents

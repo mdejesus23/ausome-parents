@@ -14,6 +14,7 @@ export default function Prose({ children, className }: ProseProps) {
         'prose-headings:font-bold prose-headings:text-text-secondary',
         'prose-a:text-blue-600 hover:prose-a:text-blue-800',
         'prose-img:rounded-xl prose-img:shadow-md',
+        'mx-auto', // ✅ Horizontally center the article
         className,
       )}
     >
