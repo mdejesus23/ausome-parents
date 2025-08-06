@@ -1,3 +1,4 @@
+import { unstable_cache } from 'next/cache';
 import postgres from 'postgres';
 import type { Tag, Post } from '@/types';
 
@@ -16,9 +17,10 @@ export async function getTags() {
   }
 }
 
-export async function getPosts() {
-  try {
-    const data = await sql<Post[]>`
+export const getPosts = unstable_cache(
+  async () => {
+    try {
+      const data = await sql<Post[]>`
       SELECT 
         posts.id,
         posts.title,
@@ -36,12 +38,15 @@ export async function getPosts() {
       ORDER BY posts.pub_date DESC
     `;
 
-    return data;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch posts data.');
-  }
-}
+      return data;
+    } catch (error) {
+      console.error('Database Error:', error);
+      throw new Error('Failed to fetch posts data.');
+    }
+  },
+  ['posts'], // 🔹 cache key
+  { tags: ['posts'] }, // 🔹 cache tags
+);
 
 export async function getPostById(id: string) {
   try {

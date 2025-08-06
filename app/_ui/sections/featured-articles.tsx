@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getPosts } from '@/app/_lib/data-services';
 import type { Post } from '@/types';
+import Button from '../button';
+import { MoveRight } from 'lucide-react';
 
 export default async function FeaturedArticles() {
   const posts: Post[] = await getPosts();
@@ -16,6 +18,13 @@ export default async function FeaturedArticles() {
           Discover insightful articles to guide and inspire you on your
           parenting journey.
         </p>
+
+        <div className="flex items-center justify-center">
+          <Button variant="outline" href="/posts" className="mx-auto mb-8">
+            View All Articles
+            <MoveRight size={15} />
+          </Button>
+        </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => {

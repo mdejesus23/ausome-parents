@@ -2,7 +2,8 @@
 
 import postgres from 'postgres';
 import { z } from 'zod';
-import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+import { revalidateTag } from 'next/cache';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -85,12 +86,15 @@ export async function createPost(prevState: State, formData: FormData) {
       );
     }
 
-    revalidatePath('/admin/dashboard/posts');
-    return { message: 'Post created successfully!' };
+    // return { message: 'Post created successfully!' };
   } catch (error) {
     console.error(error);
     return { message: 'Database Error: Failed to Create Post.' };
   }
+
+  // revalidatePath('/admin/dashboard/posts');
+  revalidateTag('posts');
+  redirect('/admin/dashboard/posts');
 }
 
 export async function updatePost(
@@ -149,15 +153,19 @@ export async function updatePost(
       );
     }
 
-    revalidatePath('/admin/dashboard/posts');
-    return { message: 'Post updated successfully!' };
+    // revalidatePath('/admin/dashboard/posts');
+    // return { message: 'Post updated successfully!' };
   } catch (error) {
     console.error('Database Error:', error);
     return { message: 'Database Error: Failed to update Post.', errors: {} };
   }
+
+  revalidateTag('posts');
+  redirect('/admin/dashboard/posts');
 }
 
 export async function deletePost(id: string) {
   await sql`DELETE FROM posts WHERE id = ${id}`;
-  revalidatePath('/admin/dashboard/posts');
+  revalidateTag('posts');
+  // revalidatePath('/admin/dashboard/posts');
 }

@@ -7,7 +7,7 @@ import type { NavLink as Navlinks } from '@/types';
 export const headerLinks: Navlinks[] = [
   { text: 'Home', url: '/' },
   { text: 'About Us', url: '/about-us' },
-  { text: 'Blog', url: '/blog' },
+  { text: 'Posts', url: '/posts' },
   { text: 'Contact', url: '/contact' },
   { text: 'Admin', url: '/admin' },
 ];
