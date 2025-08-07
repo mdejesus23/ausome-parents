@@ -1,4 +1,4 @@
-import { getPosts } from '../_lib/data-services';
+import { getPosts, fetchPostsPages } from '../_lib/data-services';
 import type { Post } from '@/types';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
@@ -6,6 +6,7 @@ import { SITE } from '@/app/_data/constant';
 import PageHero from '@/app/_ui/global/page-hero';
 import { PostListsSkeleton } from '@/app/_ui/skeleton';
 import PostLists from '../_ui/sections/post-lists';
+import Pagination from '../_ui/pagination';
 
 export const metadata: Metadata = {
   title: 'Catholic Parenting Blog | Holy Reflections & Bible Insights',
@@ -46,8 +47,20 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://awesome-parents.melnerdz.com'),
 };
 
-export default async function Page() {
-  const posts: Post[] = await getPosts();
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: Promise<{
+    query?: string;
+    page?: string;
+  }>;
+}) {
+  const params = await searchParams;
+  const query = params?.query || '';
+  const currentPage = params?.page || 1;
+
+  const [totalPages, posts]: [totalPages: number, posts: Post[]] =
+    await Promise.all([fetchPostsPages(query), getPosts()]);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -91,9 +104,12 @@ export default async function Page() {
       />
 
       <section className="container mx-auto my-20 px-4">
-        <Suspense fallback={<PostListsSkeleton />}>
-          <PostLists />
+        <Suspense key={query + currentPage} fallback={<PostListsSkeleton />}>
+          <PostLists query={query} currentPage={Number(currentPage)} />
         </Suspense>
+        <div className="mt-5 flex w-full justify-center">
+          <Pagination totalPages={totalPages} />
+        </div>
       </section>
     </div>
   );

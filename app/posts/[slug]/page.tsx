@@ -23,13 +23,13 @@ export async function generateMetadata(props: {
       description: post.description,
       url: `${SITE.url}/posts/${post.id}`,
       type: 'article',
-      images: post.image ? [{ url: post.image }] : [],
+      images: [`/posts/${params.slug}/opengraph-image`], // Dynamic OG image
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: post.image ? [post.image] : [],
+      images: [`/posts/${params.slug}/opengraph-image`],
     },
   };
 }

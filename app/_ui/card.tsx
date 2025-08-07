@@ -27,22 +27,23 @@ export default function Card({
   return (
     <Element
       href={href || ''}
-      className={`group grid grid-cols-1 gap-0 bg-white transition md:grid-cols-2 ${className}`}
+      className={`group grid grid-cols-1 items-start bg-white transition md:grid-cols-[300px_1fr] ${className}`}
     >
       {/* Left: Image */}
       {image && (
-        <figure className="relative h-60 w-full overflow-hidden rounded-xl md:h-auto">
+        <figure className="flex items-start justify-center overflow-hidden rounded-md p-4 md:p-6">
           <Image
             src={image.src}
             alt={image.alt}
-            fill
-            className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+            width={300}
+            height={300}
+            className="h-auto w-full max-w-[300px] object-contain"
           />
         </figure>
       )}
 
       {/* Right: Metadata */}
-      <div className="relative flex flex-col justify-center gap-2 p-5">
+      <div className="flex flex-col gap-2 p-5">
         <h3 className="mb-2 text-xl font-bold text-gray-900">{title}</h3>
         <div className="text-gray-700">{children}</div>
       </div>
