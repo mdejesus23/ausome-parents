@@ -26,8 +26,8 @@ export async function generateMetadata(props: {
       images: [
         {
           url: post.image,
-          width: 1200,
-          height: 630,
+          width: '100%',
+          height: '100%',
           alt: post.title,
         },
       ],
@@ -39,8 +39,8 @@ export async function generateMetadata(props: {
       images: [
         {
           url: post.image,
-          width: 1200,
-          height: 630,
+          width: '100%',
+          height: '100%',
           alt: post.title,
         },
       ],

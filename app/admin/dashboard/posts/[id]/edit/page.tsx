@@ -9,10 +9,10 @@ import { notFound } from 'next/navigation';
 import Loader from '@/app/_ui/loader';
 
 export const metadata: Metadata = {
-  title: 'Admin Login Page | Awesome Parents ',
+  title: 'Admin Login Page | Ausome Parents ',
   description:
     'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
-  metadataBase: new URL('https://awesome-parents.melnerdz.com'), // Update with your real domain
+  metadataBase: new URL('https://Ausome-parents.melnerdz.com'), // Update with your real domain
 };
 
 const jsonLd = {

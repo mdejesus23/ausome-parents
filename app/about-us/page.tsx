@@ -4,9 +4,47 @@ import PageHero from '../_ui/global/page-hero';
 import { SITE, ISPARTOF } from '@/app/_data/constant';
 
 export const metadata: Metadata = {
-  title: 'About Us | Awesome Parents',
+  title: 'About Us | Ausome Parents',
   description:
-    'Learn more about the mission, values, and story behind Awesome Parents blog.',
+    'Learn more about the mission, values, and story behind Ausome Parents blog.',
+  alternates: {
+    canonical: `${SITE.url}/about-us`,
+  },
+  openGraph: {
+    title: 'About Us | Ausome Parents',
+    description:
+      'Discover our mission, values, and the heart behind Ausome Parents — a space created to support and uplift families.',
+    url: `${SITE.url}/about-us`,
+    siteName: SITE.title,
+    images: [
+      {
+        url: 'https://ausome-parents.melnerdz.com/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Catholic parenting blog cover image',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Us | Ausome Parents',
+    description:
+      'Discover our mission, values, and the heart behind Ausome Parents — a space created to support and uplift families.',
+    images: [
+      {
+        url: 'https://ausome-parents.melnerdz.com/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Catholic parenting blog cover image',
+      },
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 const jsonLd = {
@@ -72,7 +110,7 @@ export default function Page() {
               Our Story
             </h2>
             <p className="text-gray-700">
-              Born from a passion for writing and a heart for families, Awesome
+              Born from a passion for writing and a heart for families, Ausome
               Parents was created to share real stories, practical advice, and
               encouraging reflections from everyday family life.
             </p>

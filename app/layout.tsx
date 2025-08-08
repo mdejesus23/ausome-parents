@@ -7,24 +7,38 @@ import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Awesome Parents',
-    default: 'Awesome Parents',
+    template: '%s | Ausome Parents',
+    default: 'Ausome Parents',
   },
   description:
     'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
   metadataBase: new URL('https://ausome-parents.melnerdz.com/'),
   openGraph: {
-    title: 'Awesome Parents',
+    title: 'Ausome Parents',
     description:
       'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
-    images: ['https://ausome-parents.melnerdz.com/opengraph-image.png'],
+    images: [
+      {
+        url: 'https://ausome-parents.melnerdz.com/opengraph-image.png',
+        width: '100%',
+        height: '100%',
+        alt: 'Ausome Parents',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Awesome Parents',
+    title: 'Ausome Parents',
     description:
       'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
-    images: ['https://ausome-parents.melnerdz.com/opengraph-image.png'],
+    images: [
+      {
+        url: 'https://ausome-parents.melnerdz.com/opengraph-image.png',
+        width: '100%',
+        height: '100%',
+        alt: 'Ausome Parents',
+      },
+    ],
   },
 };
 

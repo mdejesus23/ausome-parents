@@ -5,10 +5,39 @@ import Newsletter from '../_ui/sections/newsletter';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact Page | Awesome Parents ',
+  title: 'Contact Page | Ausome Parents',
   description:
     'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
-  metadataBase: new URL('https://awesome-parents.melnerdz.com'), // Update with your real domain
+  metadataBase: new URL('https://ausome-parents.melnerdz.com'),
+  openGraph: {
+    title: 'Contact Page | Ausome Parents',
+    description:
+      'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
+    url: 'https://ausome-parents.melnerdz.com/contact-us',
+    type: 'website',
+    images: [
+      {
+        url: 'https://ausome-parents.melnerdz.com/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Ausome Parents Contact Page',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ausome Parents',
+    description:
+      'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
+    images: [
+      {
+        url: 'https://ausome-parents.melnerdz.com/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Ausome Parents Contact Page',
+      },
+    ],
+  },
 };
 
 const jsonLd = {

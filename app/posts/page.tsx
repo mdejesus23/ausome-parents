@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     'faith-based parenting',
     'Catholic spiritual insights',
   ],
-  authors: [{ name: 'Awesome Parents Team', url: SITE.url }],
+  authors: [{ name: 'Ausome Parents Team', url: SITE.url }],
   openGraph: {
     title: 'Catholic Parenting Blog | Holy Reflections & Bible Insights',
     description:
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: `${SITE.url}/blog-header-bg.webp`,
+        url: 'https://ausome-parents.melnerdz.com/posts-opengraph-image.png',
         width: 1200,
         height: 630,
         alt: 'Catholic parenting blog cover image',
@@ -41,10 +41,17 @@ export const metadata: Metadata = {
     title: 'Catholic Parenting Blog | Holy Reflections & Bible Insights',
     description:
       'Faith-based reflections and Bible insights for Catholic parents to guide and inspire family life.',
-    images: [`${SITE.url}/blog-header-bg.webp`],
+    images: [
+      {
+        url: 'https://ausome-parents.melnerdz.com/posts-opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Catholic parenting blog cover image',
+      },
+    ],
     creator: '@yourtwitterhandle',
   },
-  metadataBase: new URL('https://awesome-parents.melnerdz.com'),
+  metadataBase: new URL('https://ausome-parents.melnerdz.com/'),
 };
 
 export default async function Page({
@@ -65,7 +72,7 @@ export default async function Page({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'Awesome Parents Blog',
+    name: 'Ausome Parents Blog',
     description:
       'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
     url: `${SITE.url}/posts`,
