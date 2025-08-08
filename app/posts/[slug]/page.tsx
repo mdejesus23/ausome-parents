@@ -87,7 +87,7 @@ export default async function Page(props: {
       <PageHero
         imageSrc={post.image || '/placeholder.jpg'}
         title={post.title}
-        excerpt={post.description || ''}
+        excerpt={post.description}
       />
 
       {/* Post Content */}
