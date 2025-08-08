@@ -4,6 +4,7 @@ import { getPosts } from '@/app/_lib/data-services';
 import type { Post } from '@/types';
 import Button from '../button';
 import { MoveRight } from 'lucide-react';
+import { Calendar, User } from 'lucide-react';
 
 export default async function FeaturedArticles() {
   const posts: Post[] = await getPosts();
@@ -57,9 +58,15 @@ export default async function FeaturedArticles() {
 
                 {/* Content */}
                 <div className="flex flex-1 flex-col px-6 py-5">
-                  <p className="mb-2 text-sm text-gray-500">
-                    {formattedDate} {post.author && `· ${post.author}`}
-                  </p>
+                  <div className="mb-2 flex items-center gap-4 text-sm text-gray-500">
+                    <p className="flex items-center gap-2">
+                      <Calendar size={18} /> {formattedDate}
+                    </p>
+
+                    <p className="flex items-center gap-2">
+                      <User size={18} /> {post.author}
+                    </p>
+                  </div>
 
                   <h3 className="text-text-primary mb-2 text-lg font-semibold">
                     {post.title}
