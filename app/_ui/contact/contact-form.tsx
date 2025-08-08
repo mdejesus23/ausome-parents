@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Button from '@/app/_ui/button';
 import { Mail, Facebook, Instagram } from 'lucide-react';
-import Link from 'next/link';
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
