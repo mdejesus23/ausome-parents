@@ -56,7 +56,7 @@ export default function ContactForm() {
                 </a>
 
                 <a
-                  href="https://www.facebook.com/profile.php?id=61578399737770"
+                  href="https://www.instagram.com/ausome_parents23/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
