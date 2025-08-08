@@ -1,5 +1,5 @@
 User-Agent: *
 Allow: /
-Disallow: /private/
+Disallow: /admin
 
-Sitemap: https://vercel.com/melnards-projects/ausome-parents/sitemap.xml
+Sitemap: https://ausome-parents.melnerdz.com/sitemap.xml

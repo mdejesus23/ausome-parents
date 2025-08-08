@@ -6,12 +6,12 @@ import { SITE, ISPARTOF } from '@/app/_data/constant';
 import type { Post } from '@/types';
 import { Metadata } from 'next';
 
-// ✅ Generate SEO Metadata
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const post = await getPostBySlug(params.slug);
+  const { slug } = params;
+  const post = await getPostBySlug(slug);
 
   if (!post) return { title: 'Post Not Found' };
 
@@ -21,15 +21,29 @@ export async function generateMetadata(props: {
     openGraph: {
       title: post.title,
       description: post.description,
-      url: `${SITE.url}/posts/${post.id}`,
+      url: `${SITE.url}/posts/${post.slug}`,
       type: 'article',
-      images: [`/posts/${params.slug}/opengraph-image`], // Dynamic OG image
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: [`/posts/${params.slug}/opengraph-image`],
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
   };
 }
@@ -78,10 +92,10 @@ export default async function Page(props: {
 
       {/* Post Content */}
       <div className="mx-auto mt-10 max-w-[45rem] px-4 lg:px-8">
-        <div className="mb-8 text-gray-500">
-          {/* <span>{new Date(post.pub_date).toLocaleDateString()}</span> */}
-          {/* <span>{post.author}</span> */}
-        </div>
+        {/* <div className="mb-8 text-gray-500">
+          <span>{new Date(post.pub_date).toLocaleDateString()}</span>
+          <span>{post.author}</span>
+        </div> */}
 
         <Prose>
           <div dangerouslySetInnerHTML={{ __html: post.content }} />

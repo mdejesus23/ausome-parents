@@ -12,7 +12,20 @@ export const metadata: Metadata = {
   },
   description:
     'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
-  metadataBase: new URL('https://awesome-parents.melnerdz.com'), // Update with your real domain
+  metadataBase: new URL('https://ausome-parents.melnerdz.com/'),
+  openGraph: {
+    title: 'Awesome Parents',
+    description:
+      'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
+    images: ['https://ausome-parents.melnerdz.com/opengraph-image.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Awesome Parents',
+    description:
+      'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
+    images: ['https://ausome-parents.melnerdz.com/opengraph-image.png'],
+  },
 };
 
 export default function RootLayout({

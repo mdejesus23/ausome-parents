@@ -1,13 +1,13 @@
 export const SITE = {
-  title: 'Awesome Parents',
+  title: 'Ausome Parents',
   tagline:
     'Catholic reflections and spiritual wisdom for faithful parents raising the next generation with love and grace.',
   description:
-    'Awesome Parents is a Catholic blog dedicated to offering holy reflections on Bible verses, faith-filled insights, and spiritual encouragement for parents navigating the journey of family life.',
+    'Ausome Parents is a Catholic blog dedicated to offering holy reflections on Bible verses, faith-filled insights, and spiritual encouragement for parents navigating the journey of family life.',
   description_short:
     'Catholic reflections on Scripture and family life for faithful parents.',
-  url: 'https://awesome-parents.melnerdz.com/', // Replace with your actual blog URL
-  author: 'Melnard De Jesus', // Replace with your name or pen name
+  url: 'https://ausome-parents.melnerdz.com/',
+  author: 'Melnard De Jesus',
   image: '/images/brandlogo.png',
 };
 

@@ -6,13 +6,13 @@ export const size = {
   width: 1200,
   height: 630,
 };
+
 export const contentType = 'image/png';
+
 export const alt = 'My images alt text';
 
 export default async function Image({ params }: { params: { slug: string } }) {
-  const { slug } = params;
-
-  const post = await getPostBySlug(slug);
+  const post = await getPostBySlug(params.slug);
 
   if (!post) {
     return new ImageResponse(
@@ -55,16 +55,8 @@ export default async function Image({ params }: { params: { slug: string } }) {
           justifyContent: 'center',
         }}
       >
-        <img
-          src={post.image}
-          width={1200}
-          height={400}
-          style={{ objectFit: 'cover' }}
-          alt="Cover"
-        />
-        <div style={{ marginTop: '40px', fontWeight: 'bold' }}>
-          {post.title}
-        </div>
+        <div style={{ fontSize: 36, marginBottom: 20 }}>📚 Blog Post</div>
+        <div>{post.title}</div>
       </div>
     ),
     {

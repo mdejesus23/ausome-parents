@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import Button from '@/app/_ui/button';
+import { Mail, Facebook, Instagram } from 'lucide-react';
+import Link from 'next/link';
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -20,7 +22,7 @@ export default function ContactForm() {
 
   return (
     <section className="px-4 py-10 md:px-8">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-4xl">
         <h2 className="text-text-secondary mb-4 text-center text-2xl font-bold md:text-3xl">
           We’d love to hear from you
         </h2>
@@ -28,24 +30,35 @@ export default function ContactForm() {
           Feel free to reach out with any questions, ideas, or just to say hi!
         </p>
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2">
           {/* Contact Info */}
           <div className="space-y-6 text-gray-800">
-            <div>
-              <h3 className="mb-1 text-lg font-semibold">Email</h3>
-              <p className="text-gray-600">contact@awesomeparents.com</p>
+            <div className="text-text-primary flex items-center gap-2">
+              <Mail size={23} />
+              <p className="text-gray-600">ausomeparents23@gmail.com</p>
             </div>
+
             <div>
-              <h3 className="mb-1 text-lg font-semibold">Location</h3>
-              <p className="text-gray-600">123 Grace Avenue, Joy City, PH</p>
-            </div>
-            <div>
-              <h3 className="mb-1 text-lg font-semibold">Phone</h3>
-              <p className="text-gray-600">+63 912 345 6789</p>
-            </div>
-            <div>
-              <h3 className="mb-1 text-lg font-semibold">Follow Us</h3>
-              <p className="text-gray-600">Instagram, Facebook, Twitter</p>
+              <h3 className="text-text-secondary mb-1 text-lg font-semibold">
+                Socials
+              </h3>
+              <div className="text-text-primary mt-2 flex items-center gap-3">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61578399737770"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Facebook size={23} />
+                </a>
+
+                <a
+                  href="https://www.facebook.com/profile.php?id=61578399737770"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Instagram size={23} />
+                </a>
+              </div>
             </div>
           </div>
 
