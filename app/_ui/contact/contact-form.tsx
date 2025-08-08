@@ -3,9 +3,16 @@
 import { useState } from 'react';
 import Button from '@/app/_ui/button';
 import { Mail, Facebook, Instagram } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 
+type Input = {
+  name: string;
+  email: string;
+  message: string;
+};
 export default function ContactForm() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState<Input>({ name: '', email: '', message: '' });
+  const [isSending, setIsSending] = useState<boolean>(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -13,10 +20,31 @@ export default function ContactForm() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: connect to API or email service
-    console.log(form);
+    setIsSending(true);
+
+    try {
+      const res = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || 'Failed to send the message.');
+      }
+
+      const result = await res.json();
+      toast.success(result.message);
+
+      setForm({ name: '', email: '', message: '' });
+      setIsSending(false);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : String(error));
+      setIsSending(false);
+    }
   };
 
   return (
@@ -76,6 +104,7 @@ export default function ContactForm() {
               name="name"
               placeholder="Your Name"
               required
+              value={form['name']}
               onChange={handleChange}
               className="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-4 py-2"
             />
@@ -84,6 +113,7 @@ export default function ContactForm() {
               name="email"
               placeholder="Your Email"
               required
+              value={form['email']}
               onChange={handleChange}
               className="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-4 py-2"
             />
@@ -92,11 +122,12 @@ export default function ContactForm() {
               placeholder="Your Message"
               rows={5}
               required
+              value={form['message']}
               onChange={handleChange}
               className="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-4 py-2"
             />
-            <Button type="submit" variant="primary">
-              Send Message
+            <Button disabled={isSending} type="submit" variant="primary">
+              {isSending ? 'Sending...' : 'Send Message'}
             </Button>
           </form>
         </div>
