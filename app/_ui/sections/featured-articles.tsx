@@ -26,7 +26,7 @@ export default async function FeaturedArticles() {
           </Button>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="m grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
           {posts.map((post) => {
             const formattedDate = post.pub_date
               ? new Date(post.pub_date).toLocaleDateString('en-US', {
@@ -38,32 +38,55 @@ export default async function FeaturedArticles() {
 
             return (
               <article
-                key={post.id}
-                className="overflow-hidden rounded-2xl bg-white shadow-md transition hover:shadow-lg"
+                key={post.slug}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition hover:shadow-md"
               >
-                <div className="relative h-80 w-full">
+                {/* Image Container */}
+                <Link
+                  href={`/posts/${post.slug}`}
+                  className="relative h-96 w-full overflow-hidden" // 🔁 was h-56
+                >
                   <Image
                     src={post.image || '/placeholder.jpg'}
                     alt={post.title}
                     fill
-                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="rounded-t-2xl object-cover transition duration-300 group-hover:scale-105"
                   />
-                </div>
-                <div className="p-6">
+                </Link>
+
+                {/* Content */}
+                <div className="flex flex-1 flex-col px-6 py-5">
                   <p className="mb-2 text-sm text-gray-500">
                     {formattedDate} {post.author && `· ${post.author}`}
                   </p>
-                  <h3 className="text-text-primary mb-3 text-xl font-semibold">
+
+                  <h3 className="text-text-primary mb-2 text-lg font-semibold">
                     {post.title}
                   </h3>
+
                   <p className="mb-4 line-clamp-3 text-gray-700">
-                    {post.description}
+                    {post.description || 'No description available.'}
                   </p>
+
+                  {post.tags && post.tags.length > 0 && (
+                    <div className="mb-4 flex flex-wrap gap-2">
+                      {post.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-text-primary rounded-full bg-blue-100 px-3 py-1 text-xs font-medium"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
                   <Link
                     href={`/posts/${post.slug}`}
-                    className="font-medium text-blue-600 hover:underline"
+                    className="mt-auto text-sm font-medium text-blue-600 hover:underline"
                   >
-                    Read more
+                    Read more →
                   </Link>
                 </div>
               </article>

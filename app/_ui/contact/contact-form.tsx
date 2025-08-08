@@ -35,7 +35,12 @@ export default function ContactForm() {
           <div className="space-y-6 text-gray-800">
             <div className="text-text-primary flex items-center gap-2">
               <Mail size={23} />
-              <p className="text-gray-600">ausomeparents23@gmail.com</p>
+              <a
+                href="mailto:ausomeparents23@gmail.com"
+                className="text-gray-600 underline hover:text-blue-600"
+              >
+                ausomeparents23@gmail.com
+              </a>
             </div>
 
             <div>
