@@ -41,7 +41,7 @@ const socialLinks = [
   },
   {
     name: 'Instagram',
-    href: 'https://www.facebook.com/profile.php?id=61578399737770',
+    href: 'https://www.instagram.com/ausome_parents23/',
     icon: <Instagram size={25} />,
   },
 ];
