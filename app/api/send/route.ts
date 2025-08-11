@@ -7,11 +7,29 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, message } = body;
+    const { name, email, message, token } = body;
 
     if (!name || !email || !message) {
       return NextResponse.json(
         { success: false, error: 'All fields are required.' },
+        { status: 400 },
+      );
+    }
+
+    // Verify with Google
+    const verifyRes = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+      },
+    );
+    const verifyData = await verifyRes.json();
+
+    if (!verifyData.success) {
+      return NextResponse.json(
+        { success: false, error: 'Captcha verification failed' },
         { status: 400 },
       );
     }
@@ -35,11 +53,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true, message: 'Message sent!', data });
   } catch (error) {
-    const errorMessage =
-      typeof error === 'object' && error !== null && 'message' in error
-        ? (error as { message?: string }).message
-        : String(error);
-
     return NextResponse.json(
       // { success: false, error: `Server error: ${errorMessage}` },
       { success: false, error: `Server error: Please try again.` },
