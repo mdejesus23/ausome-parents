@@ -18,11 +18,10 @@ export async function getTags() {
   }
 }
 
-export const getFilteredPosts = unstable_cache(
-  async (query: string, currentPage: number) => {
-    const offset = (currentPage - 1) * POSTS_PER_PAGE;
-    try {
-      const data = await sql<Post[]>`
+const _getFilteredPosts = async (query: string, currentPage: number) => {
+  const offset = (currentPage - 1) * POSTS_PER_PAGE;
+  try {
+    const data = await sql<Post[]>`
       SELECT 
         posts.id,
         posts.title,
@@ -36,24 +35,28 @@ export const getFilteredPosts = unstable_cache(
       FROM posts
       LEFT JOIN post_tags ON posts.id = post_tags.post_id
       LEFT JOIN tags ON post_tags.tag_id = tags.id
-        WHERE
-      posts.title ILIKE ${`%${query}%`} OR
-      posts.author ILIKE ${`%${query}%`} OR
-      posts.description ILIKE ${`%${query}%`}
+      WHERE
+        posts.title ILIKE ${`%${query}%`} OR
+        posts.author ILIKE ${`%${query}%`} OR
+        posts.description ILIKE ${`%${query}%`}
       GROUP BY posts.id
       ORDER BY posts.pub_date DESC
       LIMIT ${POSTS_PER_PAGE} OFFSET ${offset}
     `;
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch posts data.');
+  }
+};
 
-      return data;
-    } catch (error) {
-      console.error('Database Error:', error);
-      throw new Error('Failed to fetch posts data.');
-    }
-  },
-  ['posts'], // 🔹 cache key
-  { tags: ['posts'] }, // 🔹 cache tags
-);
+// Wrap with cache — parameters go into the key array here
+export const getFilteredPosts = (query: string, currentPage: number) =>
+  unstable_cache(
+    () => _getFilteredPosts(query, currentPage),
+    ['posts', query, String(currentPage)], // cache keys
+    { tags: ['posts'] }, // cache tag
+  )();
 
 export const getPosts = unstable_cache(
   async () => {
