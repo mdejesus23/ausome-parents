@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Button from '@/app/_ui/button';
 import { Mail, Facebook, Instagram } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 type Input = {
   name: string;
@@ -13,6 +14,7 @@ type Input = {
 export default function ContactForm() {
   const [form, setForm] = useState<Input>({ name: '', email: '', message: '' });
   const [isSending, setIsSending] = useState<boolean>(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -24,11 +26,20 @@ export default function ContactForm() {
     e.preventDefault();
     setIsSending(true);
 
+    // Get captcha token
+    const token = await recaptchaRef.current?.getValue();
+    if (!token) {
+      alert('Please verify you are human.');
+      toast.error('Please verify you are human.');
+      setIsSending(false);
+      return;
+    }
+
     try {
       const res = await fetch('/api/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, token }),
       });
 
       if (!res.ok) {
@@ -125,6 +136,11 @@ export default function ContactForm() {
               value={form['message']}
               onChange={handleChange}
               className="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-4 py-2"
+            />
+
+            <ReCAPTCHA
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+              ref={recaptchaRef}
             />
             <Button disabled={isSending} type="submit" variant="primary">
               {isSending ? 'Sending...' : 'Send Message'}
