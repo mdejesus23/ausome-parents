@@ -29,7 +29,6 @@ export default function ContactForm() {
     // Get captcha token
     const token = await recaptchaRef.current?.getValue();
     if (!token) {
-      alert('Please verify you are human.');
       toast.error('Please verify you are human.');
       setIsSending(false);
       return;
