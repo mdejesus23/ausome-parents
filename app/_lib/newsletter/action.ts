@@ -21,6 +21,11 @@ export default async function subscribe(
       };
     }
     const email = formData.get('email') as string;
+    const honey = formData.get('website') as string;
+
+    if (honey) {
+      return { success: false, message: 'Spam detected' };
+    }
 
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       return { success: false, message: 'Invalid email address.' };

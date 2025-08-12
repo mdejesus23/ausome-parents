@@ -70,6 +70,15 @@ export default function Newsletter() {
               placeholder="Enter your email"
               className="w-full max-w-sm rounded-sm border px-5 py-3 text-white placeholder-gray-300 focus:ring-2 focus:ring-white focus:outline-none"
             />
+
+            {/* Honeypot field */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              style={{ display: 'none' }}
+            />
             <SubmitButton />
           </form>
         </div>
