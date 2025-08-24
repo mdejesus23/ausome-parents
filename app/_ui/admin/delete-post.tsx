@@ -2,8 +2,8 @@
 
 import { useFormStatus } from 'react-dom';
 import { deletePost } from '@/app/_lib/posts/action';
-import Button from '../../button';
-import Loader from '../../loader';
+import Button from '../button';
+import Loader from '../loader';
 
 export function SubmitButton() {
   const { pending } = useFormStatus();

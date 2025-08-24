@@ -58,6 +58,7 @@ export const getFilteredPosts = (query: string, currentPage: number) =>
     { tags: ['posts'] }, // cache tag
   )();
 
+// for json-ld in posts/page.tsx
 export const getPosts = unstable_cache(
   async () => {
     try {
@@ -107,6 +108,7 @@ export async function fetchPostsPages(query: string): Promise<number> {
   }
 }
 
+// to fetch editing post.
 export async function getPostById(id: string) {
   try {
     const rows = await sql<Post[]>`

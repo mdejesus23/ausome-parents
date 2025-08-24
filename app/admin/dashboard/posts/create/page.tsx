@@ -2,8 +2,8 @@ import { SITE, ISPARTOF } from '@/app/_data/constant';
 import PageHero from '@/app/_ui/global/page-hero';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-import CreatePostForm from '@/app/_ui/admin/posts/create-post-form';
-import { getTags } from '@/app/_lib/data-services';
+import CreatePostForm from '@/app/_ui/admin/create-post-form';
+import { getTags } from '@/app/_lib/posts/data-services';
 import type { Tag } from '@/types';
 
 export const metadata: Metadata = {

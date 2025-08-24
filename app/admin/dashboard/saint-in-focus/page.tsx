@@ -1,11 +1,14 @@
 import PageHero from '@/app/_ui/global/page-hero';
-import { getPosts, fetchPostsPages } from '@/app/_lib/posts/data-services';
+import {
+  getSaints,
+  fetchSaintsPages,
+} from '@/app/_lib/saints-in-focus/data-services';
 import { SITE } from '@/app/_data/constant';
 import { Plus } from 'lucide-react';
-import type { Post } from '@/types';
+import type { Saint } from '@/types';
 import Button from '@/app/_ui/button';
 import { Suspense } from 'react';
-import PostTable from '@/app/_ui/admin/post-table';
+import SaintTable from '@/app/_ui/admin/saint-table';
 import Loader from '@/app/_ui/loader';
 import Search from '@/app/_ui/search';
 import Pagination from '@/app/_ui/pagination';
@@ -21,30 +24,21 @@ export default async function Page({
   const params = await searchParams;
   const query = params?.query || '';
   const currentPage = params?.page || 1;
-
-  const [totalPages, posts]: [totalPages: number, posts: Post[]] =
-    await Promise.all([fetchPostsPages(query), getPosts()]);
+  const [totalPages, saints]: [totalPages: number, saints: Saint[]] =
+    await Promise.all([fetchSaintsPages(query), getSaints()]);
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Blog',
-    name: 'Blog Posts | ' + SITE.title,
-    url: SITE.url + '/posts',
-    blogPost: posts.map((post) => ({
-      '@type': 'BlogPosting',
-      headline: post.title,
-      image: post.image ? [SITE.url + post.image] : undefined,
-      datePublished: post.pub_date,
-      dateModified: post.pub_date,
-      description: post.description,
-      author: {
-        '@type': 'Person',
-        name: post.author || 'Admin',
-      },
-      mainEntityOfPage: {
-        '@type': 'WebPage',
-        '@id': SITE.url + '/posts/' + post.slug,
-      },
+    '@type': 'CollectionPage',
+    name: 'Saints in Focus | ' + SITE.title,
+    url: SITE.url + '/saints',
+    about: saints.map((saint) => ({
+      '@type': 'Person',
+      name: saint.name,
+      image: saint.image ? [SITE.url + saint.image] : undefined,
+      description: saint.description,
+      deathDate: saint.feast_day || undefined,
+      sameAs: saint.slug ? SITE.url + '/saints/' + saint.slug : undefined,
     })),
   };
 
@@ -60,21 +54,21 @@ export default async function Page({
 
       <PageHero
         imageSrc="/blog-header-bg.webp"
-        title="Posts List"
-        excerpt="Browse all blog posts below."
+        title="Saints in Focus"
+        excerpt="Discover the lives and feast days of saints."
       />
 
       <section className="container mx-auto my-20 px-4">
         <div className="mb-8 flex items-center justify-between gap-2 md:mt-8">
-          <Search placeholder="Search posts..." />
-          <Button href="/admin/dashboard/posts/create">
-            Create New Post
+          <Search placeholder="Search saints..." />
+          <Button href="/admin/dashboard/saints/create">
+            Add New Saint
             <Plus />
           </Button>
         </div>
 
-        <Suspense key={query + currentPage} fallback={<Loader />}>
-          <PostTable query={query} currentPage={Number(currentPage)} />
+        <Suspense fallback={<Loader />}>
+          <SaintTable query={query} currentPage={Number(currentPage)} />
         </Suspense>
 
         <div className="mt-5 flex w-full justify-center">

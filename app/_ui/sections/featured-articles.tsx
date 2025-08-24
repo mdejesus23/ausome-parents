@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getPosts } from '@/app/_lib/data-services';
+import { getPosts } from '@/app/_lib/posts/data-services';
 import type { Post } from '@/types';
 import Button from '../button';
 import { MoveRight } from 'lucide-react';

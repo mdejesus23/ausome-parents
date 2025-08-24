@@ -1,4 +1,4 @@
-import { getPostBySlug } from '@/app/_lib/data-services';
+import { getPostBySlug } from '@/app/_lib/posts/data-services';
 import { notFound } from 'next/navigation';
 import Prose from '@/app/_ui/prose';
 import PageHero from '@/app/_ui/global/page-hero';

@@ -1,7 +1,7 @@
 'use client';
 
-import Button from '../../button';
-import { DeletePost } from '@/app/_ui/admin/posts/delete-post';
+import Button from '../button';
+import { DeletePost } from '@/app/_ui/admin/delete-post';
 
 export default function ConfirmDelete({
   id,
