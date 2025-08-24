@@ -16,7 +16,7 @@ export default function FilterPost() {
       params.delete('query');
     }
     replace(`${pathname}?${params.toString()}`);
-  }, 300);
+  }, 500);
 
   function handleResetFilter() {
     const params = new URLSearchParams(searchParams);

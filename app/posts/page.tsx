@@ -1,4 +1,4 @@
-import { getPosts, fetchPostsPages } from '../_lib/data-services';
+import { getPosts, fetchPostsPages } from '../_lib/posts/data-services';
 import type { Post } from '@/types';
 import { Metadata } from 'next';
 import { Suspense } from 'react';

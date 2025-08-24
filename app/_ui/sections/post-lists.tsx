@@ -1,5 +1,5 @@
 import Card from '../card';
-import { getFilteredPosts } from '@/app/_lib/data-services';
+import { getFilteredPosts } from '@/app/_lib/posts/data-services';
 import type { Post } from '@/types';
 import { Calendar, User } from 'lucide-react';
 import FilterPost from '../filter-post';

@@ -41,7 +41,7 @@ export default async function AdminPanel() {
     {
       title: 'Manage Users',
       description: 'View and edit user roles, activity, and access.',
-      url: '/users',
+      url: '/admin/dashboard/users',
     },
     {
       title: 'Blog Posting',
@@ -51,13 +51,18 @@ export default async function AdminPanel() {
     {
       title: 'Site Settings',
       description: 'Customize SEO, layout, and feature toggles.',
-      url: '/settings',
+      url: '/admin/dashboard/settings',
     },
     {
-      title: 'Newsletter',
-      description: 'Send updates or view subscribers.',
-      url: '/newsletter',
+      title: 'Saint in Focus',
+      description: 'Create update or delete saint in focus posts.',
+      url: '/admin/dashboard/saint-in-focus',
     },
+    // {
+    //   title: 'Newsletter',
+    //   description: 'Send updates or view subscribers.',
+    //   url: '/admin/dashboard/newsletter',
+    // },
   ];
 
   return (

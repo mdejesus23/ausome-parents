@@ -19,3 +19,5 @@ export const ISPARTOF = {
 };
 
 export const POSTS_PER_PAGE = 6;
+
+export const SAINTS_PER_PAGE = 6;

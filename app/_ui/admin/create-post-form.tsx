@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import QuillEditor from '@/app/_ui/admin/posts/quill-editor';
+import QuillEditor from '@/app/_ui/admin/quill-editor';
 import { useFormStatus } from 'react-dom';
-import Button from '../../button';
+import Button from '../button';
 import type { Tag } from '@/types';
 import { CldUploadWidget } from 'next-cloudinary';
 import { Image as ImageIcon } from 'lucide-react';

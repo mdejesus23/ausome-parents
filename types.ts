@@ -30,3 +30,16 @@ export type Post = {
   content: string;
   tags: string[];
 };
+
+export type Saint = {
+  id: string;
+  name: string;
+  pub_date: TimestampTz;
+  feast_day: TimestampTz;
+  author: string;
+  image: string;
+  slug: string;
+  description: string;
+  content: string;
+  user_id: string;
+};
