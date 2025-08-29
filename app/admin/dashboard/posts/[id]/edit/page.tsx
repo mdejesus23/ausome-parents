@@ -7,6 +7,7 @@ import { getTags, getPostById } from '@/app/_lib/posts/data-services';
 import type { Tag, Post } from '@/types';
 import { notFound } from 'next/navigation';
 import Loader from '@/app/_ui/loader';
+import { protectedAction } from '@/app/_lib/protected-action';
 
 export const metadata: Metadata = {
   title: 'Admin Login Page | Ausome Parents ',
@@ -29,8 +30,14 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const id = params.id;
 
+  const { userId } = await protectedAction();
+
+  if (!userId) {
+    throw new Error('Not authenticated');
+  }
+
   const [post, tags]: [post: Post, tags: Tag[]] = await Promise.all([
-    getPostById(id),
+    getPostById(id, userId),
     getTags(),
   ]);
 

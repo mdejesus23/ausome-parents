@@ -4,6 +4,7 @@ import postgres from 'postgres';
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { revalidateTag } from 'next/cache';
+import { protectedAction } from '../protected-action';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -26,6 +27,7 @@ const FormSchema = z.object({
     .min(1, 'Please fill up slug field.'),
 
   image: z.string().min(1, 'Please upload image.'),
+
   description: z
     .string({ error: 'Please provide description.' })
     .min(1, 'Please provide description.'),
@@ -40,6 +42,12 @@ export type State = {
 };
 
 export async function createPost(prevState: State, formData: FormData) {
+  const { userId } = await protectedAction();
+
+  if (!userId) {
+    throw new Error('Not authenticated');
+  }
+
   // Extract tags first
   const tags = formData.getAll('tags[]') as string[];
 
@@ -67,8 +75,8 @@ export async function createPost(prevState: State, formData: FormData) {
   // insert post record
   try {
     const [post] = await sql`
-    INSERT INTO posts (title, pub_date, author, slug, image, description, content)
-    VALUES (${title}, ${pubDate}, ${author}, ${slug}, ${image}, ${description}, ${content})
+    INSERT INTO posts (title, pub_date, author, slug, image, description, content, user_id)
+    VALUES (${title}, ${pubDate}, ${author}, ${slug}, ${image}, ${description}, ${content}, ${userId})
     RETURNING id;
   `;
 
@@ -102,6 +110,12 @@ export async function updatePost(
   prevState: State,
   formData: FormData,
 ) {
+  const { userId } = await protectedAction();
+
+  if (!userId) {
+    throw new Error('Not authenticated');
+  }
+
   // Extract tags first
   const tags = formData.getAll('tags[]') as string[];
 

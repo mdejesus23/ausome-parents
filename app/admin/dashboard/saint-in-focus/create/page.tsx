@@ -2,12 +2,12 @@ import { SITE, ISPARTOF } from '@/app/_data/constant';
 import PageHero from '@/app/_ui/global/page-hero';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-import CreatePostForm from '@/app/_ui/admin/create-post-form';
+import CreateSaintForm from '@/app/_ui/admin/create-saint-form';
 import { getTags } from '@/app/_lib/posts/data-services';
 import type { Tag } from '@/types';
 
 export const metadata: Metadata = {
-  title: 'Admin Create Post Page | Ausome Parents ',
+  title: 'Admin create Saint in focus article Page | Ausome Parents ',
   description:
     'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
   metadataBase: new URL('https://Ausome-parents.melnerdz.com'),
@@ -37,7 +37,7 @@ export default async function Page() {
 
       <PageHero
         imageSrc="/blog-header-bg.webp"
-        title="Create Blog Posts"
+        title="Create Saint in focus article"
         excerpt="Create a Blog Posts"
       />
 
@@ -45,7 +45,7 @@ export default async function Page() {
         <div className="container mx-auto">
           {/* Post In Form */}
           <Suspense fallback={<div className="loader"></div>}>
-            <CreatePostForm tags={tags} />
+            <CreateSaintForm />
           </Suspense>
         </div>
       </section>
