@@ -121,17 +121,20 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-8 border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
           <p>&copy; {currentYear} Ausome Parents. All rights reserved.</p>
-          {/* <p className="mt-2">
+          <p className="mt-2 space-x-4">
             <Link
               href="/privacy-policy"
-              className="hover:text-primary-300 mr-4"
+              className="hover:text-primary-300 transition-colors"
             >
               Privacy Policy
             </Link>
-            <Link href="/terms-of-service" className="hover:text-primary-300">
+            <Link
+              href="/terms-of-service"
+              className="hover:text-primary-300 transition-colors"
+            >
               Terms of Service
             </Link>
-          </p> */}
+          </p>
         </div>
       </div>
     </footer>
