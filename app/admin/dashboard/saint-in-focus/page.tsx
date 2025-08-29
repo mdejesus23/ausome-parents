@@ -61,7 +61,7 @@ export default async function Page({
       <section className="container mx-auto my-20 px-4">
         <div className="mb-8 flex items-center justify-between gap-2 md:mt-8">
           <Search placeholder="Search saints..." />
-          <Button href="/admin/dashboard/saints/create">
+          <Button href="/admin/dashboard/saint-in-focus/create">
             Add New Saint
             <Plus />
           </Button>

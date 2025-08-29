@@ -109,7 +109,7 @@ export async function fetchPostsPages(query: string): Promise<number> {
 }
 
 // to fetch editing post.
-export async function getPostById(id: string) {
+export async function getPostById(id: string, userId: string) {
   try {
     const rows = await sql<Post[]>`
     SELECT 
@@ -125,7 +125,7 @@ export async function getPostById(id: string) {
     FROM posts
     LEFT JOIN post_tags ON posts.id = post_tags.post_id
     LEFT JOIN tags ON post_tags.tag_id = tags.id
-    WHERE posts.id = ${id}
+    WHERE posts.id = ${id} AND posts.user_id = ${userId}
     GROUP BY posts.id
   `;
 

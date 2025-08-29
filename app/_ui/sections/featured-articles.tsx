@@ -7,7 +7,7 @@ import { MoveRight } from 'lucide-react';
 import { Calendar, User } from 'lucide-react';
 
 export default async function FeaturedArticles() {
-  const posts: Post[] = await getPosts();
+  const posts: Post[] = (await getPosts()).slice(0, 3);
 
   return (
     <section className="my-20 flex flex-col">
