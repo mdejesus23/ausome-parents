@@ -2,20 +2,19 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-  /* =======================
-     Brand Colors
-     These are the core colors of your website’s brand identity.
-  ======================= */
-  --color-primary: #ffffff; /* Main background or primary surfaces */
-  --color-secondary: #2563eb; /* Dark color for footer, or emphasis */
-  --color-tertiary: #f9fafb; /* Light neutral background for sections/cards */
+  --color-brand-orange: #ffb000;
+  --color-brand-blue: #0875e8;
+  --color-brand-green: #75c91b;
+  --color-brand-red: #f52f55;
+  --color-brand-brown: #54251d;
+  --color-brand-white: #ffffff;
 
-  /* =======================
-     Text Colors
-     Used for primary and secondary text elements.
-  ======================= */
-  --color-text-primary: #2563eb; /* Main text or headline color */
-  --color-text-secondary: #4b5563; /* Subtext, descriptions, or muted text */
+  --color-primary: var(--color-brand-white);
+  --color-secondary: var(--color-brand-blue);
+  --color-tertiary: var(--color-brand-orange);
+
+  --color-text-primary: var(--color-brand-blue);
+  --color-text-secondary: var(--color-brand-brown);
 
   /* =======================
      Font Families
@@ -42,7 +41,7 @@
   h4,
   h5,
   h6 {
-    @apply font-playfair text-primary;
+    @apply font-playfair text-text-primary;
   }
 
   /* HTML: <div class="loader"></div> */
@@ -51,7 +50,7 @@
     padding: 4px;
     aspect-ratio: 1;
     border-radius: 50%;
-    background: #2563eb;
+    background: var(--color-brand-blue);
     --_m:
       conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
     -webkit-mask: var(--_m);
