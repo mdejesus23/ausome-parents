@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { Facebook, Instagram } from 'lucide-react';
 
 const footerNavs = [
@@ -60,22 +59,20 @@ export default function Footer() {
                 href="/"
                 className="inline-flex items-end gap-3 font-serif text-2xl font-bold text-white"
               >
-                <Image
-                  src="/ap-logo-white.png"
-                  alt="brand logo image"
-                  width={60}
-                  height={60}
-                  className="hidden h-auto w-auto md:block"
-                />
-
-                <Image
-                  src="/ap-logo-white.png"
-                  alt="brand logo image"
-                  width={40}
-                  height={40}
-                  className="block h-auto w-auto md:hidden"
-                />
-                <span>Ausome Parents</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 1774 887"
+                  role="img"
+                  aria-label="Ausome Parents"
+                  className="h-16 w-auto"
+                >
+                  <image
+                    href="/new-logo.png"
+                    width="1774"
+                    height="887"
+                    preserveAspectRatio="xMidYMid meet"
+                  />
+                </svg>
               </Link>
             </div>
 

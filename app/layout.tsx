@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   description:
     'A Catholic blog offering holy reflections on Bible verses, spiritual insights, and faith-based encouragement for parents.',
   metadataBase: new URL('https://ausome-parents.melnerdz.com/'),
+  icons: {
+    icon: '/favicon-new-logo.svg',
+    apple: '/favicon-new-logo.png',
+  },
   openGraph: {
     title: 'Ausome Parents',
     description:

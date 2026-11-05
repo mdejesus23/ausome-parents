@@ -1,7 +1,6 @@
 import NavLink from '@/app/_ui/links/nav-link';
 import Link from 'next/link';
 import type { NavLink as Navlinks } from '@/types';
-import Image from 'next/image';
 import Menu from '../menu';
 
 export const headerLinks: Navlinks[] = [
@@ -17,24 +16,20 @@ export default async function Header() {
     <header className="sticky top-0 z-50 w-full bg-white/90 shadow-sm backdrop-blur-md">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 py-2 sm:px-6 md:py-4 lg:px-8 lg:py-6">
         <Link href="/" className="flex items-center gap-3">
-          <Image
-            src="/ap-logo-blue.png"
-            alt="brand logo image"
-            width={50}
-            height={50}
-            className="hidden h-10 w-10 md:block"
-          />
-
-          <Image
-            src="/ap-logo-blue.png"
-            alt="brand logo image"
-            width={40}
-            height={40}
-            className="block h-10 w-10 md:hidden"
-          />
-          <h1 className="text-text-primary text-xl font-bold md:text-2xl">
-            Ausome Parents
-          </h1>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1774 887"
+            role="img"
+            aria-label="Ausome Parents"
+            className="h-16 w-auto"
+          >
+            <image
+              href="/new-logo.png"
+              width="1774"
+              height="887"
+              preserveAspectRatio="xMidYMid meet"
+            />
+          </svg>
         </Link>
 
         {/* desktop navigation  */}
